@@ -1,12 +1,20 @@
 <?php
-$servername= "localhost";
-$username= "root";
-$password= "cdti1234"; //ใน xamppไม่ต้องระบุ password
-$dbname= "db"; //กำหนดชื่อฐำนข้อมูล
-// Create connection
-$conn= new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if($conn->connect_error) {
-die("Connection failed: ". $conn->connect_error);
-}
+    ob_start();
+    sesseion_start();
+
+    if (!isset($_SESSION['loggedin'])) {
+        header('Locarion: login.php');
+        exit;
+    }
+
+    echo"Welcome to Website";
+    echo"<p> $_SESSION[email] </p>";
+    echo"<p> <a href='logout.php'> Logout </a> </p>";
+
+
+    if (isset($_SESSION['loggedin'])) {
+        echo"<a href='blog_view.php'> แสดง Blog </a> | ";
+        echo"<a href='blog_form.php'> เพิ่ม Blog </a> | ";
+        
+    }
 ?>
